@@ -60,7 +60,8 @@ const Search = ({ onFilter }) => {
             className="bg-transparent w-full border border-gray-50 rounded-md outline-0 focus:ring focus:ring-indigo-200"
           >
             <option value="">Select Price Range</option>
-            <option value="700000-1500000">Rs 7 - 15 Lakh</option>
+            <option value="500000-1000000">Rs 5 - 10 Lakh</option>
+            <option value="1000000-1500000">Rs 10 - 15 Lakh</option>
             <option value="1500000-2500000">Rs 15 - 25 Lakh</option>
             <option value="2500000-5000000">Rs 25 - 50 Lakh</option>
             <option value="5000000-99999999">Above Rs 50 Lakh</option>

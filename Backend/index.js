@@ -96,12 +96,12 @@ app.post('/api/login', async (req, res) => {
 //Test Ride Route
 app.post('/api/test-ride', async (req, res) => {
   console.log('Test Ride Request Received:', req.body); // Debug log
-  const { name, age, licenseNo, date } = req.body;
+  const { name, age, licenseNo, date, car } = req.body;
 
   try {
     await pool.query(
-      'INSERT INTO public.test_rides (name, age, license_no, ride_date) VALUES ($1, $2, $3, $4)',
-      [name, age, licenseNo, date]
+      'INSERT INTO public.test_rides (name, age, license_no, ride_date, car) VALUES ($1, $2, $3, $4, $5)',
+      [name, age, licenseNo, date, car]
     );
     res.status(201).json({ message: 'Test ride booked successfully!' });
   } catch (error) {

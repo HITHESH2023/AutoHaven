@@ -90,6 +90,7 @@ const AdminPage = () => {
               <th className="border border-gray-300 px-4 py-2">Age</th>
               <th className="border border-gray-300 px-4 py-2">License No</th>
               <th className="border border-gray-300 px-4 py-2">Date</th>
+              <th className="border border-gray-300 px-4 py-2">Car Model</th>
               <th className="border border-gray-300 px-4 py-2">Actions</th>
             </tr>
           </thead>
@@ -101,6 +102,7 @@ const AdminPage = () => {
                 <td className="border border-gray-300 px-4 py-2">{ride.age}</td>
                 <td className="border border-gray-300 px-4 py-2">{ride.license_no}</td>
                 <td className="border border-gray-300 px-4 py-2">{ride.ride_date}</td>
+                <td className="border border-gray-300 px-4 py-2">{ride.car}</td>
                 <td className="border border-gray-300 px-4 py-2">
                   <button
                     className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"

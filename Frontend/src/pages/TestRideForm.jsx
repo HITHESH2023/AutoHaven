@@ -102,6 +102,17 @@ const TestRideForm = () => {
               className="w-full p-2 border border-gray-300 rounded-md"
             />
           </div>
+          <div>
+            <label className="block text-gray-700 font-semibold">Car Model</label>
+            <input
+              type="text"
+              name="car"
+              value={formData.car}
+              onChange={handleChange}
+              required
+              className="w-full p-2 border border-gray-300 rounded-md"
+            />
+          </div>
           <button
             type="submit"
             className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition"
