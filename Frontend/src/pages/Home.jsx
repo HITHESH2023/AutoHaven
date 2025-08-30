@@ -1,22 +1,32 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import gt3rs from "../assets/gt3rs.jpg"; // Assuming you saved the uploaded image in src/assets
+import gt3rs from "../assets/gt3rs.jpg";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Chatbot from "../components/Chatbot";
 
 const Home = () => {
+  // ✅ This function will open the chatbot window
+  const handleStartChat = () => {
+    if (window.botpressWebChat) {
+      window.botpressWebChat.send({ type: "show" });
+    }
+  };
+
   return (
     <div className="font-sans">
-        <Navbar />
+      <Navbar />
       {/* Hero Section */}
       <div
         className="relative bg-cover bg-center h-screen"
         style={{ backgroundImage: `url(${gt3rs})` }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white">
-          <h1 className="text-5xl font-bold mb-4">Drive Your Dream. Own the Power.</h1>
-          <p className="text-lg mb-6">Discover luxury cars tailored to perfection.</p>
+          <h1 className="text-5xl font-bold mb-4">
+            Drive Your Dream. Own the Power.
+          </h1>
+          <p className="text-lg mb-6">
+            Discover luxury cars tailored to perfection.
+          </p>
           <Link
             to="/cars"
             className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-3 px-6 rounded-full transition duration-300"
@@ -90,15 +100,26 @@ const Home = () => {
 
       {/* Chatbot Section */}
       <div className="bg-yellow-500 py-10 text-center text-black">
-        <h2 className="text-2xl font-bold mb-3">Need Help Choosing the Right Car?</h2>
-        <p className="mb-5">Chat with our AI Expert and find the perfect match for you.</p>
-        <button className="bg-black text-white py-3 px-6 rounded-full hover:bg-gray-800 transition duration-300">
+        <h2 className="text-2xl font-bold mb-3">
+          Need Help Choosing the Right Car?
+        </h2>
+        <p className="mb-5">
+          Chat with our AI Expert and find the perfect match for you.
+        </p>
+        <button
+          onClick={handleStartChat} // ✅ Added the onClick handler here
+          className="bg-black text-white py-3 px-6 rounded-full hover:bg-gray-800 transition duration-300"
+        >
           Start Chat →
-        </button><br /><br />
-        <p className="mb-5">By Clicking on The Icon To Your Bottom-right Corner.</p>
+        </button>
+        <br />
+        <br />
+        <p className="mb-5">
+          Or click on the icon at the bottom-right corner.
+        </p>
       </div>
-    <Footer />
-    <Chatbot />
+      <Footer />
+      <Chatbot />
     </div>
   );
 };

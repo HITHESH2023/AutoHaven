@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', password: '' });
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,8 +16,9 @@ const Register = () => {
 
       const data = await response.json();
       if (response.ok) {
-        alert(`Registration successful! Your username is ${data.username}`);
-        window.location.href = '/login'; // Redirect
+        // ✅ Simplified the success message
+        alert('Registration successful! You can now log in.');
+        navigate('/login');
       } else {
         alert(data.message);
       }

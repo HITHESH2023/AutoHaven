@@ -1,18 +1,23 @@
+// 💡 Add this to read the .env file
+require('dotenv').config();
+
 const bcrypt = require('bcrypt');
 const { Pool } = require('pg');
 
+// 💡 Change this Pool configuration
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'mp_user_credentials',
-  password: 'postgres@123',
-  port: 5432,
+  // It now reads the connection string from your .env file
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 const insertAdmin = async () => {
+  // These are the details for your admin user
   const username = 'admin';
   const email = 'admin@gmail.com';
-  const password = 'admin@123';
+  const password = 'admin';
 
   try {
     // Hash the password
@@ -24,12 +29,14 @@ const insertAdmin = async () => {
       [username, email, hashedPassword]
     );
 
-    console.log('Admin added successfully!');
+    console.log('✅ Admin added successfully to your Neon database!');
   } catch (error) {
-    console.error('Error inserting admin:', error);
+    // This will catch errors like "admin already exists"
+    console.error('Error inserting admin:', error.detail || error.message);
   } finally {
     pool.end(); // Close the database connection
   }
 };
 
+// Run the function
 insertAdmin();

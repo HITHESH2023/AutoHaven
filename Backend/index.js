@@ -1,23 +1,31 @@
 const express = require('express');
-const bcrypt = require('bcrypt'); // Ensure bcrypt is imported
+const bcrypt = require('bcrypt');
 const { Pool } = require('pg');
 const jwt = require('jsonwebtoken');
-const cors = require('cors');
 
 require('dotenv').config();
 
-const JWT_SECRET = process.env.JWT_SECRET; // Use from .env file
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const app = express();
 app.use(express.json());
-app.use(cors());
 
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'mp_user_credentials',
-  password: 'postgres@123',
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+
+// This endpoint will serve the car data from your database.
+app.get('/api/cars', async (req, res) => {
+  try {
+    const allCars = await pool.query('SELECT * FROM public.cars ORDER BY id');
+    res.json(allCars.rows);
+  } catch (error) {
+    console.error('Error fetching cars:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
 
 // Register Route
@@ -38,16 +46,14 @@ app.post('/api/register', async (req, res) => {
     );
 
     const userId = newUser.rows[0].id;
-    const username = `${firstName.toLowerCase()}.${lastName.toLowerCase()}`;
-
-    // Hash password and store login credentials
     const hashedPassword = await bcrypt.hash(password, 10);
+
     await pool.query(
       'INSERT INTO public.logins (username, email, password, user_id) VALUES ($1, $2, $3, $4)',
-      [username, email, hashedPassword, userId]
+      [email, email, hashedPassword, userId]
     );
 
-    res.status(201).json({ message: 'User registered successfully', username });
+    res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
@@ -56,35 +62,40 @@ app.post('/api/register', async (req, res) => {
 
 // Login Route
 app.post('/api/login', async (req, res) => {
-  const { usernameOrEmail, password } = req.body;
+
+  const { email, password } = req.body;
 
   try {
-    // Fetch user by username or email
-    const user = await pool.query(
-      'SELECT * FROM public.logins WHERE username = $1 OR email = $2',
-      [usernameOrEmail, usernameOrEmail]
+    // ✅ Fetch user by email only and join to get name
+    const result = await pool.query(
+      `SELECT l.id, l.email, l.password, u.first_name, u.last_name 
+       FROM public.logins l
+       JOIN public.users u ON l.user_id = u.id
+       WHERE l.email = $1`,
+      [email]
     );
 
-    if (user.rows.length === 0) {
+    if (result.rows.length === 0) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    const validPassword = await bcrypt.compare(password, user.rows[0].password);
+    const loginData = result.rows[0];
+    const validPassword = await bcrypt.compare(password, loginData.password);
     if (!validPassword) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
     // Generate JWT token
-    const token = jwt.sign({ id: user.rows[0].id }, JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: loginData.id }, JWT_SECRET, { expiresIn: '1h' });
 
-    // Return user details and token
+    // ✅ Return user details without username
     res.json({
       message: 'Login successful',
       token,
       user: {
-        id: user.rows[0].id,
-        username: user.rows[0].username,
-        email: user.rows[0].email,
+        id: loginData.id,
+        email: loginData.email,
+        firstName: loginData.first_name, // Send first name for display
       },
     });
   } catch (error) {

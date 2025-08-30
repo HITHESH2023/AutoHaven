@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-
-const Search = ({ onFilter }) => {
+const Search = () => {
   const [country, setCountry] = useState("");
   const [brand, setBrand] = useState("");
   const [priceRange, setPriceRange] = useState("");
+  const navigate = useNavigate();
 
   const handleSearch = () => {
-    onFilter({ country, brand, priceRange });
+    // ✅ Create a query string from the selected filters
+    const queryParams = new URLSearchParams({
+      country,
+      brand,
+      priceRange,
+    }).toString();
+    
+    // ✅ Navigate to the sort page with the query string
+    navigate(`/sort?${queryParams}`);
   };
 
   return (
@@ -43,7 +51,6 @@ const Search = ({ onFilter }) => {
             <option value="Maruti Suzuki">Maruti Suzuki</option>
             <option value="Mahindra">Mahindra</option>
             <option value="Tata">Tata</option>
-            <option value="Maruti Suzuki">Maruti Suzuki</option>
             <option value="Honda">Honda</option>
             <option value="Hyundai">Hyundai</option>
             <option value="BYD">BYD</option>
@@ -67,14 +74,12 @@ const Search = ({ onFilter }) => {
             <option value="5000000-99999999">Above Rs 50 Lakh</option>
           </select>
         </div>
-        <Link to="/sort">
         <button
-          onClick={handleSearch}
+          onClick={handleSearch} // ✅ Call handleSearch on click
           className="px-4 py-2 bg-indigo-600 text-white rounded-full"
         >
           Search
         </button>
-        </Link>
       </div>
     </div>
   );

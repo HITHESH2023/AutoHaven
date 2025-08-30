@@ -1,0 +1,33 @@
+# Dependencies and lock files
+node_modules/
+yarn.lock
+package-lock.json
+
+# Environment variables - DO NOT COMMIT THESE
+.env
+.env.*
+!.env.example
+
+# Build output folders
+/Backend/dist
+/Frontend/dist
+/dist
+
+# IDE and OS files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Vite-specific cache and build files
+.vite/
+.vercel/

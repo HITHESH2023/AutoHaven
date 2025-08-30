@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const [formData, setFormData] = useState({ usernameOrEmail: '', password: '' });
+  // ✅ State updated for email only
+  const [formData, setFormData] = useState({ email: '', password: '' });
   const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,9 +20,9 @@ const Login = () => {
       const data = await response.json();
       if (response.ok) {
         alert('Login successful!');
-        localStorage.setItem('token', data.token); // Store token
-        login(data.user); // Update context with user data
-        window.location.href = '/'; // Redirect to home
+        localStorage.setItem('token', data.token);
+        login(data.user);
+        navigate('/');
       } else {
         alert(data.message);
       }
@@ -37,14 +40,15 @@ const Login = () => {
       >
         <h2 className="text-2xl font-bold text-center text-gray-800">Login</h2>
         <div>
-          <label htmlFor="usernameOrEmail" className="block text-sm font-medium text-gray-700">
-            Username or Email
+          {/* ✅ Changed label and input for Email */}
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            Email
           </label>
           <input
-            type="text"
-            name="usernameOrEmail"
-            placeholder="Enter your username or email"
-            value={formData.usernameOrEmail}
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            value={formData.email}
             onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
             required
             className="w-full px-4 py-2 mt-1 border rounded-md focus:ring focus:ring-blue-300"
