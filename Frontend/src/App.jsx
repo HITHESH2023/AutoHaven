@@ -19,7 +19,7 @@ function App() {
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        const response = await fetch('/api/cars');
+        const response = await fetch('https://autohaven-y8q5.onrender.com/api/cars');
         const data = await response.json();
 
         // Convert the numeric price from DB back to a formatted string for display
