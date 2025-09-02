@@ -9,7 +9,7 @@ const AdminLogin = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/adminLogin', {
+      const response = await fetch('https://autohaven-y8q5.onrender.com/api/adminLogin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
