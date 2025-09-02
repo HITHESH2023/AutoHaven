@@ -8,9 +8,9 @@ const AdminPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const usersResponse = await fetch("/api/admin/users");
-        const testRidesResponse = await fetch("/api/admin/test-rides");
-        const contactsResponse = await fetch("/api/admin/contacts");  // Fetch contacts
+        const usersResponse = await fetch("https://autohaven-y8q5.onrender.com/api/admin/users");
+        const testRidesResponse = await fetch("https://autohaven-y8q5.onrender.com/api/admin/test-rides");
+        const contactsResponse = await fetch("https://autohaven-y8q5.onrender.com/api/admin/contacts");  // Fetch contacts
         setUsers(await usersResponse.json());
         setTestRides(await testRidesResponse.json());
         setContacts(await contactsResponse.json());  // Set contacts data
@@ -24,10 +24,10 @@ const AdminPage = () => {
   const handleDelete = async (type, id) => {
     const endpoint =
       type === "user"
-        ? `/api/admin/users/${id}`
+        ? `https://autohaven-y8q5.onrender.com/api/admin/users/${id}`
         : type === "test ride"
-        ? `/api/admin/test-rides/${id}`
-        : `/api/admin/contacts/${id}`;  // Handle contact deletion
+        ? `https://autohaven-y8q5.onrender.com/api/admin/test-rides/${id}`
+        : `https://autohaven-y8q5.onrender.com/api/admin/contacts/${id}`;  // Handle contact deletion
 
     try {
       await fetch(endpoint, { method: "DELETE" });
