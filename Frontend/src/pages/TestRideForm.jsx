@@ -29,7 +29,7 @@ const TestRideForm = () => {
   
     try {
       // Send data to the backend
-      const response = await fetch("/api/test-ride", {
+      const response = await fetch("https://autohaven-y8q5.onrender.com/api/test-ride", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
