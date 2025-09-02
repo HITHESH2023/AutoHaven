@@ -8,9 +8,9 @@ const AdminPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const usersResponse = await fetch("http://localhost:5000/api/admin/users");
-        const testRidesResponse = await fetch("http://localhost:5000/api/admin/test-rides");
-        const contactsResponse = await fetch("http://localhost:5000/api/admin/contacts");  // Fetch contacts
+        const usersResponse = await fetch("/api/admin/users");
+        const testRidesResponse = await fetch("/api/admin/test-rides");
+        const contactsResponse = await fetch("/api/admin/contacts");  // Fetch contacts
         setUsers(await usersResponse.json());
         setTestRides(await testRidesResponse.json());
         setContacts(await contactsResponse.json());  // Set contacts data
@@ -24,10 +24,10 @@ const AdminPage = () => {
   const handleDelete = async (type, id) => {
     const endpoint =
       type === "user"
-        ? `http://localhost:5000/api/admin/users/${id}`
+        ? `/api/admin/users/${id}`
         : type === "test ride"
-        ? `http://localhost:5000/api/admin/test-rides/${id}`
-        : `http://localhost:5000/api/admin/contacts/${id}`;  // Handle contact deletion
+        ? `/api/admin/test-rides/${id}`
+        : `/api/admin/contacts/${id}`;  // Handle contact deletion
 
     try {
       await fetch(endpoint, { method: "DELETE" });
