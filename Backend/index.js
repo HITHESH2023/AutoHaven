@@ -2,13 +2,20 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const { Pool } = require('pg');
 const jwt = require('jsonwebtoken');
-
+const cors = require('cors');
 require('dotenv').config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const app = express();
+
 app.use(express.json());
+
+app.use(cors({
+  origin: ["https://auto-haven-g9yb9gz13-litheshpatelcgs-projects.vercel.app"], 
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
