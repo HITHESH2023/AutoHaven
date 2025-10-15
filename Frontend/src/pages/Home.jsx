@@ -16,7 +16,6 @@ const Home = () => {
       {/* Hero Section */}
       <div
         className="relative bg-cover bg-center h-screen"
-        // ✅ Corrected this line
         style={{
           backgroundImage:
             "url('https://res.cloudinary.com/dqxtox5rl/image/upload/v1760378579/gt3rs_jhthc5.jpg')",
