@@ -9,7 +9,7 @@ const AdminLogin = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/adminLogin', {
+      const response = await fetch('https://autohaven-ccoz.onrender.com/api/adminLogin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
