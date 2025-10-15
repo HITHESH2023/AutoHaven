@@ -8,9 +8,9 @@ const AdminPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const usersResponse = await fetch("http://localhost:5000/api/admin/users");
-        const testRidesResponse = await fetch("http://localhost:5000/api/admin/test-rides");
-        const contactsResponse = await fetch("http://localhost:5000/api/admin/contacts");  // Fetch contacts
+        const usersResponse = await fetch("https://autohaven-ccoz.onrender.com/api/admin/users");
+        const testRidesResponse = await fetch("https://autohaven-ccoz.onrender.com/api/admin/test-rides");
+        const contactsResponse = await fetch("https://autohaven-ccoz.onrender.com/api/admin/contacts");  // Fetch contacts
         setUsers(await usersResponse.json());
         setTestRides(await testRidesResponse.json());
         setContacts(await contactsResponse.json());  // Set contacts data
