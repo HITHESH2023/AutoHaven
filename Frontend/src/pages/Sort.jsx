@@ -5,7 +5,6 @@ import Cars from '../components/Cars.jsx';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
 import Chatbot from '../components/Chatbot.jsx';
-import backgroundImage from "../assets/bgimg3.jpg";
 
 const Sort = ({ cars }) => {
   const [filteredCars, setFilteredCars] = useState(cars);
@@ -39,7 +38,7 @@ const Sort = ({ cars }) => {
   }, [searchParams, cars]); // Dependency array ensures this runs when params change
 
   return (
-    <div style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
+    <div style={{ backgroundImage: "https://res.cloudinary.com/dqxtox5rl/image/upload/v1760378571/bgimg3_wyzhyf.jpg", backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
       <Navbar />
       {/* The Search component here will now correctly navigate to apply new filters */}
       <Search /> 
