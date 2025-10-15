@@ -1,7 +1,6 @@
 import Navbar from '../components/Navbar.jsx';
 import ImageSlider from '../components/ImageSlider.jsx';
 import { Link, useParams } from 'react-router-dom';
-import backgroundImage from "../assets/bgimg3.jpg";
 import Footer from '../components/Footer.jsx';
 import Chatbot from '../components/Chatbot.jsx';
 
