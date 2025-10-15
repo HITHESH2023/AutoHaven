@@ -29,7 +29,7 @@ const TestRideForm = () => {
   
     try {
       // Send data to the backend
-      const response = await fetch("http://localhost:5000/api/test-ride", {
+      const response = await fetch("https://autohaven-ccoz.onrender.com/api/test-ride", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
