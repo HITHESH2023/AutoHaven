@@ -1,182 +1,206 @@
-# AI-Driven Marketplace for Vehicles 🚗🤖
+# AutoHaven: AI-Powered Car Buying Assistant
 
-An **AI-Driven Marketplace for Vehicles** that leverages advanced AI technology to provide personalized vehicle recommendations, facilitate test ride bookings, and streamline the buying and selling process for luxury cars and bikes. This platform is designed to enhance user experience and efficiency for both buyers and sellers.
+AutoHaven is a web application designed to simplify the car buying process. It features an AI-powered chatbot that provides users with comprehensive, unbiased information about various car models, helping them make informed decisions without the pressure of a traditional sales environment.
 
----
+## 🌟 Features
 
-## Features 🌟
+### For Users:
 
-### For Buyers:
-- **Personalized Recommendations**:
-  - AI suggests vehicles based on user preferences and search history.
-- **Test Ride Booking**:
-  - Schedule test rides for luxury vehicles with ease.
-- **Advanced Search Filters**:
-  - Filter vehicles by brand, model, price, features, and more.
-
-### For Sellers:
-- **Seamless Listings**:
-  - Create and manage vehicle listings effortlessly.
-- **Performance Insights**:
-  - Analytics on listing views, inquiries, and sales.
+  * **AI Chatbot**: An intelligent assistant trained on a comprehensive dataset of cars to answer questions about technical specifications, features, pros and cons, and pricing.
+  * **Browse and Search Cars**: Users can browse a gallery of cars and search for specific models.
+  * **Detailed Car Information**: View detailed pages for each car with all the relevant information.
+  * **User Authentication**: Secure user registration and login functionality.
+  * **Test Drive Booking**: Users can book a test drive for their chosen car.
+  * **Contact Form**: A simple way for users to send messages and inquiries.
 
 ### For Admins:
-- **Inventory Management**:
-  - Oversee vehicle listings and test ride availability.
-- **User Management**:
-  - Manage buyers and sellers on the platform.
-- **AI Training Data**:
-  - Update and refine AI recommendation algorithms.
 
----
+  * **Admin Dashboard**: A dedicated page for admins to manage the application's data.
+  * **User Management**: View and delete registered users.
+  * **Manage Test Drives**: View and delete test drive bookings.
+  * **Manage Contacts**: View and delete messages from the contact form.
 
-## Tech Stack 🛠️
+## 💻 Tech Stack
 
-### Frontend:
-- **React.js**: For a dynamic and responsive user interface.
-- **HTML5**, **CSS3**, **JavaScript**: Core web technologies.
-- **TailwindCSS**: For modern and efficient styling.
+### Frontend
 
-### Backend:
-- **Node.js**: For server-side logic.
-- **Express.js**: To handle API requests and routing.
-- **PostgreSQL**: As the relational database for storing user, vehicle, and transaction data.
-- **MongoDB**: For storing AI training data and logs.
+  * **React**: A JavaScript library for building user interfaces.
+  * **React Router**: For declarative routing in the React application.
+  * **Botpress**: For integrating the AI-powered chatbot.
 
-### AI Integration:
-- **Recommendation System/Chatbot**:
-  - Built using BotPress.
-  - Trained on user preferences and vehicle data.
-- **Natural Language Processing (NLP)**:
-  - For understanding user queries and providing accurate search results.
+### Backend
 
----
+  * **Node.js**: A JavaScript runtime built on Chrome's V8 JavaScript engine.
+  * **Express**: A fast, unopinionated, minimalist web framework for Node.js.
+  * **PostgreSQL**: A powerful, open-source object-relational database system.
+  * **bcryptjs**: For hashing passwords.
+  * **jsonwebtoken**: For generating and verifying JSON Web Tokens.
+  * **cors**: For enabling Cross-Origin Resource Sharing.
+  * **dotenv**: For loading environment variables from a `.env` file.
 
-## Installation & Setup 🚀
+## 🚀 Getting Started
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/your-username/ai-vehicle-marketplace.git
-   cd ai-vehicle-marketplace
-   ```
+### Prerequisites
 
-2. **Install dependencies**:
-   - Backend:
-     ```bash
-     cd backend
-     npm install
-     ```
-   - Frontend:
-     ```bash
-     cd frontend
-     npm install
-     ```
+  * Node.js and npm (or yarn)
+  * PostgreSQL
 
-3. **Setup the database**:
-   - Ensure PostgreSQL and MongoDB are installed and running.
-   - Create the necessary databases and run the provided scripts in `database/schema.sql` and `database/seed.js`.
+### Installation
 
-4. **Environment variables**:
-   - Create a `.env` file in the backend folder and add the following:
-     ```
-     PORT=5000
-     DATABASE_URL=your_postgresql_connection_string
-     MONGO_URI=your_mongodb_connection_string
-     AI_API_KEY=your_ai_api_key
-     ```
+1.  **Clone the repository:**
 
-5. **Run the project**:
-   - Backend:
-     ```bash
-     cd Backend
-     node index.js
-     ```
-   - Frontend:
-     ```bash
-     cd Frontend
-     yarn run dev
-     ```
+    ```bash
+    git clone https://github.com/your-username/autohaven.git
+    ```
 
----
+2.  **Backend Setup:**
 
-## Usage 💻
+      * Navigate to the `Backend` directory:
+        ```bash
+        cd Backend
+        ```
+      * Install the dependencies:
+        ```bash
+        npm install
+        ```
+      * Create a `.env` file in the `Backend` directory and add the following environment variables:
+        ```env
+        DATABASE_URL="your-postgresql-database-url"
+        JWT_SECRET="your-jwt-secret"
+        ```
+      * Start the backend server:
+        ```bash
+        npm start
+        ```
 
-1. **For Buyers**:
-   - Register and log in to explore vehicles.
-   - Use the search and filter options to find your ideal vehicle.
-   - Book test rides directly through the platform.
+3.  **Frontend Setup:**
 
-2. **For Admins**:
-   - Log in to manage users, vehicles, and test rides.
-   - Refine AI recommendations by updating training data.
+      * Navigate to the `Frontend` directory:
+        ```bash
+        cd Frontend
+        ```
+      * Install the dependencies:
+        ```bash
+        npm install
+        ```
+      * Start the frontend development server:
+        ```bash
+        npm run dev
+        ```
 
----
+## 📋 API Endpoints
 
-## Database Schema 📊
+### User Routes
 
-### Tables:
-1. **Users**:
-   - `id` (Primary Key)
-   - `first_name`
-   - `last_name`
-   - `email`
-   - `password`
-   - `role` (buyer/seller/admin)
+  * `POST /api/register`: Register a new user.
+  * `POST /api/login`: Log in a user.
+  * `GET /api/cars`: Get a list of all cars.
+  * `POST /api/test-ride`: Book a test ride.
+  * `POST /api/contact`: Submit a message through the contact form.
 
-2. **Vehicles**:
-   - `id` (Primary Key)
-   - `seller_id` (Foreign Key)
-   - `brand`
-   - `model`
-   - `price`
-   - `features`
-   - `availability`
+### Admin Routes
 
-3. **Test Rides**:
-   - `id` (Primary Key)
-   - `vehicle_id` (Foreign Key)
-   - `user_id` (Foreign Key)
-   - `ride_date`
+  * `POST /api/adminLogin`: Log in as an administrator.
+  * `GET /api/admin/users`: Get a list of all users.
+  * `GET /api/admin/test-rides`: Get a list of all test rides.
+  * `GET /api/admin/contacts`: Get a list of all contact messages.
+  * `DELETE /api/admin/users/:id`: Delete a user.
+  * `DELETE /api/admin/test-rides/:id`: Delete a test ride.
+  * `DELETE /api/admin/contacts/:id`: Delete a contact message.
 
-4. **AI Logs** (MongoDB):
-   - `id` (Primary Key)
-   - `user_query`
-   - `recommendations`
-   - `timestamp`
+## 🗃️ Database Schema
 
----
+Here is the basic schema for the PostgreSQL database:
 
-## Future Enhancements 🌟
-- Currently the website only has cars, in future other category vehicles can also be added.
-- Integration with payment gateways for secure transactions.
-- Real-time chat between buyers and sellers.
-- AI-powered price suggestions for sellers.
-- Augmented Reality (AR) view for vehicles.
+```sql
+-- Cars Table
+CREATE TABLE public.cars (
+    id SERIAL PRIMARY KEY,
+    model VARCHAR(255) NOT NULL,
+    price VARCHAR(255),
+    category VARCHAR(255),
+    brand VARCHAR(255),
+    -- ... other car details
+);
 
----
+-- Users Table
+CREATE TABLE public.users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL
+);
 
-## Contributing 🤝
-Contributions are welcome! Please fork the repository, create a feature branch, and submit a pull request.
+-- Logins Table
+CREATE TABLE public.logins (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    user_id INTEGER REFERENCES public.users(id) ON DELETE CASCADE
+);
 
----
+-- Test Rides Table
+CREATE TABLE public.test_rides (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    age INTEGER,
+    license_no VARCHAR(255),
+    ride_date DATE,
+    car VARCHAR(255)
+);
 
-## License 📜
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+-- Contacts Table
+CREATE TABLE public.contacts (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    message TEXT
+);
 
----
+-- Admins Table
+CREATE TABLE public.admins (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255) UNIQUE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+```
 
-## Acknowledgements 🙏
-- [PostgreSQL](https://www.postgresql.org/) and [MongoDB](https://www.mongodb.com/) for database management.
-- [React.js](https://reactjs.org/) for building the frontend.
-- [Botpress](https://botpress.com) for chatbot development
+## 📂 Project Structure
 
----
+```
+AutoHaven/
+├── Backend/
+│   ├── node_modules/
+│   ├── index.js
+│   ├── package.json
+│   └── ...
+├── Frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── context/
+│   │   ├── pages/
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   └── ...
+│   ├── package.json
+│   └── ...
+└── README.md
+```
 
-## Contact 📨
-For any queries or suggestions, feel free to contact:
-- **Your Name**: [cghithesh7@gmail.com](mailto:cghithesh7@gmail.com)
-- [GitHub Profile](https://github.com/HITHESH2023)
+## 🤝 Contributing
 
----
+Contributions are welcome\! Please feel free to submit a pull request.
 
-Thank you for exploring the AI-Driven Marketplace for Vehicles! 🚗✨
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License. See `LICENSE` for more information.
